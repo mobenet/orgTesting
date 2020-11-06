@@ -25,7 +25,7 @@
 		<name>AuraDefinitionBundle</name>
 	</types>
 	<types>
-		<members>Expense__c</members>
+		<members>Camping_Item__c</members>
 		<name>CustomObject</name>
 	</types>
 	<types>
