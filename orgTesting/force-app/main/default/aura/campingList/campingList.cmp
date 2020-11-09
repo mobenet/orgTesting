@@ -1,4 +1,4 @@
-<aura:component>
+<aura:component controller="CampingListController">
     <aura:attribute name="items" type="Camping_Item__c[]"/>
     <aura:attribute name="newItem" type="Camping_Item__c"
         default="{'sobjectType':'Camping_Item__c', 
@@ -6,6 +6,10 @@
                     'Quantity__c':0, 
                     'Price__c': 0,
                     'Packed__c':false}"/>
+
+    <!--handling the init event. handling the init event in the doInit action handler in our controller-->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+
     <ol>
         <li>Bear Repellant</li>
         <li>Bug Spray</li>
@@ -32,12 +36,15 @@
             	<lightning:input type="number" aura:id="itemform" label="Quantity"
                              name="itemquantity"
                              min="1"
-                             value="{!v.newItem.Quantity__c}"/>
+                             value="{!v.newItem.Quantity__c}"
+                             required="true"
+                             messageWhenRangeOverflow="Enter a quantity over 1"/>
             	<lightning:input aura:id="itemform" label="Price"
                              name="itemprice"
                              value="{!v.newItem.Price__c}"
                              formatter="currency"
                              step="0.01"
+                             required="true"
                              messageWhenRangeUnderflow="Enter a price that's at least $0.10."/>
             	<lightning:input type="checkbox" aura:id="itemform" label="Packed?"
                              name="itempacked"
@@ -51,10 +58,10 @@
       	</fieldset>
       	<!-- / BOXED AREA -->
     	</div>
-    <!-- / CREATE NEW EXPENSE -->        
+    <!-- / CREATE NEW item -->        
        </lightning:layoutItem>
     </lightning:layout>
-    <!-- / NEW EXPENSE FORM -->
+    <!-- / NEW item FORM -->
     <lightning:card title="Items">
         <p class="slds-p-horizontal_small">
             <aura:iteration items="{!v.items}" var="item">

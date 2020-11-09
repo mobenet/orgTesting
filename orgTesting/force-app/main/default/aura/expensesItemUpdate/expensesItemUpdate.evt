@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT">
+    <!--an event attribute describes the payload it can carry-->
+    <aura:attribute name="expense" type="Expense__c"/>
+</aura:event>
