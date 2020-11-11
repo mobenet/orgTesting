@@ -1,9 +1,13 @@
 ({
-    packItem : function(component, event, helper) {
-        var newMessage = event.getSource().get("v.label");
-        console.log("handleClick2: Message: " + newMessage);
-        component.set("v.item.Packed__c", true);
-        component.set("v.packed!",disabled="true");
+    clickPacked : function(component, event, helper) {
+        //gets the event that changed
+        let item = component.get("v.item");
+        //creates an event named updateItem 
+        let updateEvent = component.getEvent("updateItem");
+        //packages item into the event
+        updateEvent.setParams({ "item":item});
+        //fires the event
+        updateEvent.fire();
     },
     
 })

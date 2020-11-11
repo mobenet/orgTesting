@@ -18,20 +18,45 @@
         $A.enqueueAction(action); 
     },
     
-    clickCreateItem : function(component, event, helper) {
-        let validItem = component.find('itemform').reduce(function (validSoFar, inputCmp){
-            inputCmp.showHelpMessageIfInvalid();
-            return validSoFar && inputCmp.get('v.validity').valid;
-        }, true);
-        if (validItem){
-            let newItem = component.get("v.newItem");
-            console.log("Create new item : " + JSON.stringify(newItem));
-            helper.createItem(component, newItem);
+
+    handleUpdateItem: function(component, event, helper){
+        let updatedItem = event.getParam("item");
+        this.updateItem(component, updatedItem); 
+    },
+
+    
+    handleAddItem: function (component, event, helper){
+        let createdItem = event.getParam("item");
+        this.createItem(component, createdItem);
+    },
+
+
+    saveItem: function(component, item, callback){
+        //obtenemos el metodo de saveItems del aura enabled apex controller
+        let action = component.get("c.saveItem"); 
+        //attachamos a data payload
+        action.setParams({
+            "item":newItem
+        });
+        //si hay callback sera la createItem 
+        if (callback) {
+            action.setCallback(this, callback);
         }
-        component.set("v.newItem", {'sobjectType':'Camping_Item__c', 
-            'Name':'',
-            'Quantity__c':0, 
-            'Price__c': 0,
-            'Packed__c':false});
+        $A.enqueueAction(action); 
+    },
+
+    createItem : function(component, item) {
+        this.saveItem(component, item, function(response){
+            let state = response.getState();
+            if (state == 'SUCCESS') {
+                let items = component.get("v.items");
+                items.push(response.getReturnValue());
+                component.set("v.items", items);
+            }
+        });
+    },
+
+    updateItem: function(component, item){
+      this.saveItem(component, item); 
     }
 })

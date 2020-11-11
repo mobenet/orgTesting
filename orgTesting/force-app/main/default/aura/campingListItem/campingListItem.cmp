@@ -1,5 +1,6 @@
 <aura:component>
     <aura:attribute name="item" type="Camping_Item__c" required="true"/>
+    <aura:registerEvent name="updateItem" type="c:addItemEvent"/>
     <lightning:card title="{!v.item.Name}" iconName="standard:scan_card"
                     class="{!v.item.Packed__c ? 'slds-theme_succes': ''}">
 
