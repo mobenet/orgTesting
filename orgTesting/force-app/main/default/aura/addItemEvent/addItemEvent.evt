@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT">
+    <!--an event attribute describes the payload it can carry-->
+    <aura:attribute name="item" type="Camping_Item__c"/>
+</aura:event>

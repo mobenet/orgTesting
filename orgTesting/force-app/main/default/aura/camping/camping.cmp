@@ -1,22 +1,4 @@
 <aura:component>
-    <aura:attribute name="camping" type="Camping_Item__c[]"/>
-    <aura:attribute name="newCamping" type="Camping_Item__c"
-    default="{ 'sobjectType': 'Camping_Item__c',
-             	'Name': '',
-             	'Price__c': 1,
-             	'Quantity__c': 10,
-             	'Packed__c': false}"/>
-    <!-- PAGE HEADER -->
-    <lightning:layout class="slds-page-header slds-page-header_object-home">
-        <lightning:layoutItem>
-            <lightning:icon iconName="standard:scan_card" alternativeText="My Camping"/>
-        </lightning:layoutItem>
-        <lightning:layoutItem padding="horizontal-small">
-            <div class="page-section page-header">
-                <h1 class="slds-text-heading_label">Camping</h1>
-                <h2 class="slds-text-heading_medium">My Camping</h2>
-            </div>
-        </lightning:layoutItem>
-    </lightning:layout>
-    <!-- / PAGE HEADER -->
-</aura:component>
+    <c:campingHeader/>
+    <c:campingList/>
+</aura:component>	
